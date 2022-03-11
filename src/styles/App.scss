@@ -1,0 +1,43 @@
+$primaryBtn: #fff3ee;
+$primaryPoo: brown;
+
+
+@mixin flexCenter($direction) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: $direction
+}
+
+body {
+    @include flexCenter(column);
+
+}
+
+header {
+    @include flexCenter(row);
+
+}
+
+ .button {
+     background: $primaryBtn;
+
+     }
+
+
+.container {
+        @include flexCenter(row);
+        max-width: 80vw;
+        overflow: auto;
+        
+div {
+    margin: 2em;
+
+    background-color: bisque;
+}
+}
+
+.answer {
+
+    background-color: red;
+}
