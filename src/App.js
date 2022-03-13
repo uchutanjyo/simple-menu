@@ -1,45 +1,57 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect} from 'react';
 import './styles/App.css';
-import Menu from './components/Menu.js'
-import Types from './components/Types.js'
 
-import data from './components/data.js'
 
-const allTypes= ['all', ...new Set (data.map((item) => item.type
-))]
-console.log(allTypes)
+const url = ' https://dog.ceo/api/breeds/image/random/3 '
 
 
 function App() {
-  const [menuItems, setMenuItems] = useState(data);
-    const [mealType, setType] = useState(allTypes);
-
-    const filterItems = (type) => {
-      if (type == 'all') {
-        setMenuItems(data)
-      }
-      else {
-const newItems = data.filter((item) => item.type == type)
-setMenuItems(newItems)
-      }
-    }
+  const [dogs, setDogs] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const [value, setValue] = useState(0)
 
 
-  return (
+const fetchDogs = async() => {
+  try {
+    
+  const response = await fetch (url) ;
+  const newDogs = await response.json();
+  setDogs(newDogs)
+setLoading(false)
+
+  }
+  catch (error) {
+console.log(error)
+  }
+}
+
+useEffect(() => {
+  fetchDogs()
+ } , []);
+
+
+if (loading)  {
+return (<div>
+  loading..
+</div>) }
+
+
+return (
     <>  <header>
-    menu
+    ugly basic tabs project - fetches 3 dog Pics from API, displays them in separate tabs
   </header>
-<Types filterItems={filterItems} types={mealType}></Types>
-
 
 <div className="container">
-<Menu items={menuItems}></Menu>
+
+<div><img src={dogs.message[value]}></img></div>
   </div>
 
+ {dogs.message.map((dog, index)=> {
+ return <div> <button onClick={()=>(setValue(index))}>dog {index +1}</button> </div>})}
 
 </>
+)}
+  
 
-  )
-}
 
 export default App;
