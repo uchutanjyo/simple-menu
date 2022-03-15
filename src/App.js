@@ -1,54 +1,40 @@
 import React, {useState , useEffect} from 'react';
+import Home from './components/Home'
+import Modal from './components/Modal'
+import Sidebar from './components/Sidebar'
 import './styles/App.css';
 
 
-const url = ' https://dog.ceo/api/breeds/image/random/3 '
+const url = ' '
 
 
 function App() {
-  const [dogs, setDogs] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true)
   const [value, setValue] = useState(0)
 
 
-const fetchDogs = async() => {
-  try {
-    
-  const response = await fetch (url) ;
-  const newDogs = await response.json();
-  setDogs(newDogs)
-setLoading(false)
-
-  }
-  catch (error) {
-console.log(error)
-  }
-}
-
-useEffect(() => {
-  fetchDogs()
- } , []);
-
-
-if (loading)  {
-return (<div>
-  loading..
-</div>) }
-
 
 return (
     <>  <header>
-    ugly basic tabs project - fetches 3 dog Pics from API, displays them in separate tabs
+   <h1>sidebar/modal - context API</h1>
   </header>
+
+    <div>this continues my attempts to make barebones versions of projects from John Smilga's React Tutorial with little to no help/reference and other places - stricly for coding practice/learning concepts. if anyone sees these, please disregard the styling/formatting etc. :) </div>
+<br></br>
+<div>this one was more of a learning experience rather than practice as i did not properly watch the Context API tutorial videos. however, at a certain point, i didn't require the video's help to complete this project.</div>
+<br></br>
+<Home></Home>
+<Modal></Modal>
+<Sidebar></Sidebar>
+<br></br>
+  
 
 <div className="container">
 
-<div><img src={dogs.message[value]}></img></div>
+
   </div>
-
- {dogs.message.map((dog, index)=> {
- return <div> <button onClick={()=>(setValue(index))}>dog {index +1}</button> </div>})}
-
+ 
 </>
 )}
   
